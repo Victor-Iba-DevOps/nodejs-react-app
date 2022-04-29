@@ -1,0 +1,14 @@
+.dockerignore
+.git
+.gitattributes
+.gitignore 
+.npm
+npm-debug.log
+README.md
+Dockerfile
+Jenkinsfile
+jenkins
+src
+srcnew
+srcold
+node_modules
