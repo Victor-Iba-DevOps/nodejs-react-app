@@ -1,0 +1,27 @@
+ version: "3.9"
+ services:
+
+  Jenkins:
+    image: jenkins/jenkins:lts-jdk11
+    ports:
+     - "8080:8080"
+    expose:
+     - "22"
+    volumes:
+     - jenkins:/var/jenkins_home
+    privileged: true
+    restart: unless-stopped
+
+  Agent:
+    depends_on:
+      - Jenkins
+    image: react-agent:latest
+    expose:
+     - "22"
+    volumes:
+     - react-node:/home/jenkins/
+     - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+ volumes:
+   jenkins:
+   react-node:
