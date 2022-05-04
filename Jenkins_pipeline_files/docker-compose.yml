@@ -2,6 +2,7 @@
  services:
 
   Jenkins:
+    container_name: jenkins
     image: jenkins/jenkins:lts-jdk11
     ports:
      - "8080:8080"
@@ -12,6 +13,7 @@
     restart: unless-stopped
 
   Agent:
+    container_name: agent
     depends_on:
       - Jenkins
     image: react-agent:latest
