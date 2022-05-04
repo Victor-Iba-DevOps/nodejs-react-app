@@ -4,6 +4,7 @@
 .gitignore 
 .npm
 npm-debug.log
+Jenkins_pipeline_files
 README.md
 Dockerfile
 Jenkinsfile
