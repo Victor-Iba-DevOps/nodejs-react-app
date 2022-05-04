@@ -1,4 +1,4 @@
-***        React application CI\CD Jenkins pipeline.***
+        **React application CI\CD Jenkins pipeline.**
 
 
 Структура и порядок имплементации конвейера следующая:
