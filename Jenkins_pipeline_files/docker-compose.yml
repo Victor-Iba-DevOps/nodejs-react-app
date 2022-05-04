@@ -9,7 +9,6 @@
      - "22"
     volumes:
      - jenkins:/var/jenkins_home
-    privileged: true
     restart: unless-stopped
 
   Agent:
