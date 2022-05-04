@@ -4,7 +4,6 @@ pipeline {
       credentials = 'DockerhubID' 
    }   
    options {
-      skipDefaultCheckout(true)
       skipStagesAfterUnstable() 
    }
    agent {
@@ -13,7 +12,6 @@ pipeline {
    stages {
       stage('Install') {
          steps {
-            checkout scm
             sh 'npm install'
          }
       }
@@ -61,8 +59,12 @@ pipeline {
                }
             }
             sh "docker run -d --rm --name reactapp -p 4000:80 victoribatraineedevops/training-repo:1.${env.BUILD_ID}"
-            cleanWs()
          }
+      }
+   }
+   post {
+      always {
+         cleanWs()
       }
    }
 }
