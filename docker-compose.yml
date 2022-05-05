@@ -1,7 +1,7 @@
- version: "3.9"
- services:
+  version: "3.9"
+  services:
 
-  Jenkins:
+   Jenkins:
     container_name: jenkins
     image: jenkins/jenkins:lts-jdk11
     ports:
@@ -12,7 +12,7 @@
      - jenkins:/var/jenkins_home
     restart: unless-stopped
 
-  Agent:
+   Agent:
     container_name: agent
     depends_on:
       - Jenkins
@@ -23,6 +23,6 @@
      - react-node:/home/jenkins/
      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
- volumes:
-   jenkins:
-   react-node:
+  volumes:
+    jenkins:
+    react-node:
