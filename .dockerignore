@@ -13,3 +13,7 @@ src
 srcnew
 srcold
 node_modules
+Dockerfile_agent
+codechange.sh
+codechangeback.sh
+docker-compose.yml
