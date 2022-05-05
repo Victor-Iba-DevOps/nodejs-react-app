@@ -21,6 +21,7 @@
 
 // smee.io github webhook description
 
+// change of urls to gitlab repo
 
 // Идеи возможного улучшения конвейера:
 
