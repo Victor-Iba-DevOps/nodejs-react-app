@@ -59,7 +59,7 @@ pipeline {
                   currentBuild.result = 'SUCCESS'
                }
             }
-            sh "docker run -d --rm --name reactapp -p 4000:80 victoribatraineedevops/training-repo:1.${env.BUILD_ID}"
+            sh "docker run -d --restart unless-stopped --name reactapp -p 4000:80 victoribatraineedevops/training-repo:1.${env.BUILD_ID}"
          }
       }
    }
