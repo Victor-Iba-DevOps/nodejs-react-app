@@ -41,7 +41,7 @@ pipeline {
          steps {
             script {
                try {
-                  sh 'docker stop reactapp'
+                  sh 'docker stop reactapp && docker rm reactapp'
                   echo 'Previously deployed application is removed, proceeding with the deployment of new version.'
                }
                catch (err) {
