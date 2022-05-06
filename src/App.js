@@ -8,10 +8,10 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Jenkins CI/CD pipeline demo with Nodejs/React app </h1>
+          <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          Kucharau Victar "Devops Learning" task project demonstration.
+          To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
     );
