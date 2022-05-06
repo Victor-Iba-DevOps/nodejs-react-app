@@ -34,7 +34,7 @@ pipeline {
                }
             }
             sh 'docker logout'
-            sh "docker rmi victoribatraineedevops/training-repo:1.${env.BUILD_ID}"
+            sh "docker rmi nginx:stable-alpine victoribatraineedevops/training-repo:1.${env.BUILD_ID}"
          }
       }
       stage('Deploy') {
