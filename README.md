@@ -17,9 +17,8 @@
 
 *   Теперь можно приступать к созданию конвейера: *Jenkins dashboard > New Item > Multibranch Pipeline*, выбираем имя для конвейера, в настройках конвейера ставим галочки в полях "GitHub project" (и добавляем cюда [url github репозитория](https://github.com/Victor-Iba-DevOps/nodejs-react-app/)), *GitHub hook trigger for GITScm polling* (для автоматической активации конвейера каждый раз, когда на репозитории обновляется или добавляется код), в *Definition* выбираем из выпадающего меню "*Pipeline script from SCM*", в *SCM* -- "*Git*", в *Repository url* добавляем [url github репозитория](https://github.com/Victor-Iba-DevOps/nodejs-react-app/), в "*Branch specifier*" указываем ветку (по умолчанию это *master*, в данном случае у меня главная ветка названа *main*), а в поле "*Script path*" указываем "*Jenkinsfile*" без уточнений, поскольку он лежит в корневой директории репозитория. Сохраняем настройки конвейера и возвращаемся на *dashboard*.
 
-*   tbd 
+*   Так как локальная машина находится за фаерволом, можно открыть в нем 8080 порт, чтобы к Jenkins поступали сигналы от Github об обновлении кода на репозитории. Для того, чтобы не компрометировать этим локальную сеть (либо в условиях отсутствия доступа к администрированию фаервола) можно воспользоваться webhook proxy утилитой [smee.io](https://smee.io/), которая устанавливается на локальную машину командой `npm install -g smee-client`, затем в браузере открывается новый канал (сайт автоматически присвоит и выдаст *url*), который подвязывается к установленной утилите терминале командой `smee -u https://#*url*# --path /github-webhook/ --port 8080`, что позволит получать Jenkins на своем порту 8080 сигналы. Его же нужно добавить и в настройки Github репозитория, чтобы он отправлял push events: *Settings > Webhooks > Add Webhook*, вставляем *url* в поле "Payload url", в поле "*content type*" указываем "application/json", выбираем "Just the push event" в меню "*Which events would you like to trigger this webhook?*"
 
-// smee.io github webhook description
 
 // change of urls to gitlab repo
 
