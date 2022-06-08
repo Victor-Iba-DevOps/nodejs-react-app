@@ -53,9 +53,6 @@ pipeline {
       }
    }   
    post {
-      success {
-         updateGitlabCommitStatus name: 'build', state: 'success'
-      }
       always {
          cleanWs()
       }
