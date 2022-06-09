@@ -6,9 +6,12 @@
     image: jenkins/jenkins:lts-jdk11
     ports:
      - "8080:8080"
+     - "50000:50000"
     volumes:
      - jenkins:/var/jenkins_home
     restart: unless-stopped
+    networks:
+      - minikube
 
    Agent:
     container_name: agent
@@ -21,6 +24,23 @@
      - react-node:/home/jenkins/
      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    networks:
+      - minikube
+
+   Proxy:
+    container_name: smee
+    depends_on:
+      - Jenkins
+    image: deltaprojects/smee-client:latest
+    command: ["-u", "https://smee.io/iMncubqOnirnb8yO", "-t", "http://192.168.49.3:8080/project/node-react-app"]
+    restart: unless-stopped
+    networks:
+      - minikube
+
   volumes:
     jenkins:
     react-node:
+  networks:
+    minikube:
+      external:
+        name: minikube
