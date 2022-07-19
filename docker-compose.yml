@@ -1,45 +1,46 @@
-version: "3.9"
-services:
+  version: "3.9"
+  services:
 
-    NodeApp1:
-      container_name: nodeapp1
-      image: nodeapp:latest
-      restart: unless-stopped
-      expose:
-      - "8091"
-      networks:
-      - nodeapp
+   Jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:lts-jdk11
+    ports:
+     - "8080:8080"
+     - "50000:50000"
+    volumes:
+     - jenkins:/var/jenkins_home
+    restart: unless-stopped
+    networks:
+      - minikube
 
-    NodeApp2:
-      container_name: nodeapp2
-      image: nodeapp:latest
-      restart: unless-stopped
-      expose:
-      - "8092"
-      networks:
-      - nodeapp
+   Agent:
+    container_name: agent
+    depends_on:
+      - Jenkins
+    image: react-agent:latest
+    expose:
+     - "22"
+    volumes:
+     - react-node:/home/jenkins/
+     - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    networks:
+      - minikube
 
-    NodeApp3:
-      container_name: nodeapp3
-      image: nodeapp:latest
-      restart: unless-stopped
-      expose:
-      - "8093"
-      networks:
-      - nodeapp
+   Proxy:
+    container_name: smee
+    depends_on:
+      - Jenkins
+    image: deltaprojects/smee-client:latest
+    command: ["-u", "https://smee.io/iMncubqOnirnb8yO", "-t", "http://192.168.49.3:8080/project/node-react-app"]
+    restart: unless-stopped
+    networks:
+      - minikube
 
-    Nginx:
-      depends_on:
-        - NodeApp1
-        - NodeApp2
-        - NodeApp3
-      container_name: nginx
-      image: nginxlb:latest
-      ports:
-      - "82:82"
-      restart: unless-stopped
-      networks:
-      - nodeapp
-
-networks:
-  nodeapp:
+  volumes:
+    jenkins:
+    react-node:
+  networks:
+    minikube:
+      external:
+        name: minikube
